@@ -1,26 +1,26 @@
 package com.jetpack.springtech.view.adapters
 
-import android.util.Log
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jetpack.springtech.R
 import com.jetpack.springtech.databinding.PersonRowBinding
+import com.jetpack.springtech.other.AppUtils
 import com.jetpack.springtech.repositories.room.ContactsTable
+import com.jetpack.springtech.view.UserDetails
 
 
-
-class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder>() {
+class PersonAdapter(private val mContext: Context, private var personsList: List<ContactsTable>, private val onItemClicked: (ContactsTable) -> Unit) : RecyclerView.Adapter<PersonAdapter.MyViewHolder>() {
 
     lateinit var personRowBinding: PersonRowBinding
 
-    private var personsList = mutableListOf<ContactsTable>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.person_row, parent, false)
-        personRowBinding = DataBindingUtil.bind(view)!!
+        val view= LayoutInflater.from(mContext).inflate(R.layout.person_row,parent,false)
+        personRowBinding= DataBindingUtil.bind(view)!!
         return MyViewHolder(personRowBinding)
     }
 
@@ -44,13 +44,11 @@ class PersonAdapter : RecyclerView.Adapter<PersonAdapter.MyViewHolder>() {
         fun bind(person: ContactsTable) {
             personRowBinding.person = person
             personRowBinding.executePendingBindings()
-            personRowBinding.edit.setOnClickListener {
-
-
+            personRowBinding.view.setOnClickListener {
+                onItemClicked(person)
+            }
             }
         }
-
-    }
 
 }
 

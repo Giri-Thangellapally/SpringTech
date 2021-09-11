@@ -32,4 +32,17 @@ class ContactsViewModel(context: Context, private val contactsRepository: Contac
                 )
         }
     }
+     fun editPersonsData(person:ContactsTable){
+         viewModelScope.launch {
+             contactsRepository.editPersonsData(person)
+             contactsList.postValue(contactsRepository.getAllPersonsData())
+         }
+    }
+    fun deletePersonsData(person:ContactsTable){
+         viewModelScope.launch {
+             contactsRepository.deletePersonsData(person)
+             contactsList.postValue(contactsRepository.getAllPersonsData())
+         }
+    }
+
 }

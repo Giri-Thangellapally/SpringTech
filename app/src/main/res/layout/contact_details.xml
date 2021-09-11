@@ -2,35 +2,40 @@
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>
-        <variable
-            name="contactDetails"
-            type="com.jetpack.springtech.repositories.room.ContactsTable" />
-    </data>
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".views.UserDetails">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="100dp"
-            android:layout_height="45dp"
-            android:background="@color/design_default_color_error"
-            android:text="Delete"
-            android:textColor="@color/white"
+        <LinearLayout
+            android:weightSum="3"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userContainer" />
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/personImg"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginTop="44dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/userContainer">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/editBtn"
+                android:layout_width="100dp"
+                android:layout_weight="1"
+                android:layout_height="45dp"
+                android:background="@color/design_default_color_error"
+                android:text="Edit"
+                android:textColor="@color/white" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/deleteBtn"
+                android:layout_width="100dp"
+                android:layout_height="45dp"
+                android:layout_weight="1"
+                android:background="@color/design_default_color_error"
+                android:text="Delete"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/userContainer"
             android:layout_width="match_parent"
@@ -40,23 +45,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/personImg">
 
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="@{contactDetails.first_name}" />
 
-            <androidx.appcompat.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/userEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:text="@{contactDetails.email}" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@{contactDetails.first_name}" />
         </LinearLayout>
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/personImg"
+            imgPath="@{contactDetails.avatar}"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="44dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="contactDetails"
+            type="com.jetpack.springtech.repositories.room.ContactsTable" />
+    </data>
 
 </layout>
 

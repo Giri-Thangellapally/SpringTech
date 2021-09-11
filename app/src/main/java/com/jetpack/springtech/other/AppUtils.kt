@@ -14,7 +14,9 @@ import java.io.IOException
 class AppUtils {
     companion object {
         const val FILE_NAME="contacts.json"
-        const val INTENT_CONTACTS="INTENT_CONTACTS"
+        const val INTENT_CONTACTS_AVATAR="INTENT_CONTACTS_AVATAR"
+        const val INTENT_CONTACTS_NAME="INTENT_CONTACTS_NAME"
+        const val INTENT_CONTACTS_EMAIL="INTENT_CONTACTS_EMAIL"
 
         fun loadPic(imageView: ImageView, bitmap: Bitmap) {
             imageView.load(bitmap)

@@ -3,6 +3,7 @@ package com.jetpack.springtech.repositories.room
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.io.Serializable
 
 @Entity(tableName = "contact_table")
 data class ContactsTable(

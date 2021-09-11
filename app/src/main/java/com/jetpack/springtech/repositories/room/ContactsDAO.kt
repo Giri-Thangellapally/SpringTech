@@ -5,13 +5,13 @@ import androidx.room.*
 @Dao
 interface ContactsDAO {
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertData(person: ContactsTable): Long
 
     @Query("SELECT * FROM contact_table ORDER BY id")
     fun getAllPersonsData(): List<ContactsTable>
 
-    @Update
+    @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateContact(contact: ContactsTable)
 
     @Delete

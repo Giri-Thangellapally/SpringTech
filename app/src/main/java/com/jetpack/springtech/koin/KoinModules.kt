@@ -32,7 +32,7 @@ val contactsRepositoryModule = module {
         provideRepository(get())
     }
     single {
-        PersonAdapter()
+        PersonAdapter(get(),get(),get())
     }
 }
 val databaseModule = module {
