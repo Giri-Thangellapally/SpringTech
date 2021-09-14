@@ -36,14 +36,10 @@ class ContactsRepository (private val personDAO: ContactsDAO) {
     }
 
     suspend fun editPersonsData(person: ContactsTable) {
-        withContext(Dispatchers.IO) {
             personDAO.updateContact(person)
-        }
     }
     suspend fun deletePersonsData(person: ContactsTable) {
-        withContext(Dispatchers.IO) {
-            personDAO.updateContact(person)
-        }
+            personDAO.delete(person)
     }
 
 }

@@ -7,6 +7,7 @@ import com.jetpack.springtech.R
 import com.jetpack.springtech.databinding.ContactDetailsBinding
 import com.jetpack.springtech.other.AppUtils.Companion.INTENT_CONTACTS_AVATAR
 import com.jetpack.springtech.other.AppUtils.Companion.INTENT_CONTACTS_EMAIL
+import com.jetpack.springtech.other.AppUtils.Companion.INTENT_CONTACTS_ID
 import com.jetpack.springtech.other.AppUtils.Companion.INTENT_CONTACTS_NAME
 import com.jetpack.springtech.repositories.room.ContactsTable
 import com.jetpack.springtech.viewmodel.ContactsViewModel
@@ -26,15 +27,16 @@ class UserDetails : AppCompatActivity() {
         //initialising the data binding
         userDetailsBinding = DataBindingUtil.setContentView(this, R.layout.contact_details)
         val avatar=intent.extras!!.get(INTENT_CONTACTS_AVATAR) as String
+        val id=intent.extras!!.get(INTENT_CONTACTS_ID) as Int
         val firstName=intent.extras!!.get(INTENT_CONTACTS_NAME) as String
         val email=intent.extras!!.get(INTENT_CONTACTS_EMAIL) as String
 
-        details= ContactsTable(avatar = avatar,first_name = firstName,last_name = "",email = email)
+        details= ContactsTable(id =id, avatar = avatar,first_name = firstName,last_name = "",email = email)
         userDetailsBinding.contactDetails=details
         userDetailsBinding.apply {
             editBtn.setOnClickListener {
-                userDetailsViewModel.editPersonsData(ContactsTable(avatar = avatar,first_name = username.text.toString(),last_name = "",email = userEmail.text.toString()))
-                finish()
+              userDetailsViewModel.editPersonsData(ContactsTable(id= id,avatar = avatar,first_name = username.text.toString(),last_name = "",email = userEmail.text.toString()))
+            finish()
             }
             deleteBtn.setOnClickListener {
                 userDetailsViewModel.deletePersonsData(details)

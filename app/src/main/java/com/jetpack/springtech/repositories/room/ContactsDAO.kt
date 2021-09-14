@@ -6,15 +6,15 @@ import androidx.room.*
 interface ContactsDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertData(person: ContactsTable): Long
+    suspend fun insertData(person: ContactsTable): Long
 
     @Query("SELECT * FROM contact_table ORDER BY id")
-    fun getAllPersonsData(): List<ContactsTable>
+    suspend fun getAllPersonsData(): List<ContactsTable>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
-    fun updateContact(contact: ContactsTable)
+    @Update
+   suspend fun updateContact(contact: ContactsTable)
 
     @Delete
-    fun delete(contact: ContactsTable)
+   suspend fun delete(contact: ContactsTable)
 
 }

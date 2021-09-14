@@ -13,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.jetpack.springtech.other.AppUtils
 import com.jetpack.springtech.repositories.room.ContactsRepository
 import com.jetpack.springtech.repositories.room.ContactsTable
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ContactsViewModel(context: Context, private val contactsRepository: ContactsRepository):ViewModel() {
@@ -20,6 +21,9 @@ class ContactsViewModel(context: Context, private val contactsRepository: Contac
     var contactsList = MutableLiveData<List<ContactsTable>>()
 
     init {
+            getAllContactsData(context)
+    }
+    fun getAllContactsData(context :Context):MutableLiveData<List<ContactsTable>>{
         viewModelScope.launch {
             if (contactsRepository.getAllPersonsData().isNotEmpty())
                 contactsList.postValue(contactsRepository.getAllPersonsData())
@@ -31,17 +35,16 @@ class ContactsViewModel(context: Context, private val contactsRepository: Contac
                     )
                 )
         }
+        return contactsList
     }
      fun editPersonsData(person:ContactsTable){
-         viewModelScope.launch {
+         viewModelScope.launch(Dispatchers.IO) {
              contactsRepository.editPersonsData(person)
-             contactsList.postValue(contactsRepository.getAllPersonsData())
          }
     }
     fun deletePersonsData(person:ContactsTable){
-         viewModelScope.launch {
+         viewModelScope.launch(Dispatchers.IO) {
              contactsRepository.deletePersonsData(person)
-             contactsList.postValue(contactsRepository.getAllPersonsData())
          }
     }
 

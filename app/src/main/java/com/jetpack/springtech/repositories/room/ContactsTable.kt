@@ -7,8 +7,8 @@ import java.io.Serializable
 
 @Entity(tableName = "contact_table")
 data class ContactsTable(
-    @PrimaryKey(autoGenerate = true)
-    var id: Long = 0,
+    @PrimaryKey
+    var id: Int,
     @ColumnInfo(name = "avatar")
     var avatar: String,
     @ColumnInfo(name = "first_name")
@@ -17,4 +17,5 @@ data class ContactsTable(
     var last_name: String,
     @ColumnInfo(name = "email")
     val email: String = ""
+
 )
